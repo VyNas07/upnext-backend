@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Institution {
+  id            String    @id @default(uuid())
+  name          String
+  description   String
+  website       String
+  logoUrl       String
+  programs      Program[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Program {
+  id            String      @id @default(uuid())
+  title         String
+  description   String
+  institutionId String
+  institution   Institution @relation(fields: [institutionId], references: [id])
+  category      String
+  level         String
+  duration      String
+  format        String
+  startDate     String
+  endDate       String
+  requirements  String
+  benefits      String
+  imageUrl      String
+  isActive      Boolean     @default(true)
+  favorites     Favorite[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model User {
+  id         String      @id @default(uuid())
+  name       String
+  email      String      @unique
+  interests  String
+  level      String
+  favorites  Favorite[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Favorite {
+  id        String   @id @default(uuid())
+  userId    String
+  programId String
+  user      User     @relation(fields: [userId], references: [id])
+  program   Program  @relation(fields: [programId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, programId])
+}
