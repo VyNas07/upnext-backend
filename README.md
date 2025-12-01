@@ -1,164 +1,140 @@
 # UpNext Backend API
 
-Backend da plataforma UpNext - Sistema de gerenciamento de programas de formação em tecnologia.
+Backend da plataforma UpNext - API REST para gerenciamento de programas de formação em tecnologia.
 
-## 🚀 Tecnologias
+## Tecnologias
 
-- **Node.js** - Runtime JavaScript
-- **Express** - Framework web
-- **TypeScript** - Superset JavaScript com tipagem
-- **PostgreSQL** - Banco de dados relacional
-- **Prisma ORM** - ORM moderno para TypeScript
-- **Swagger** - Documentação da API
+- Node.js + Express
+- TypeScript
+- Prisma ORM
+- SQLite
+- Swagger
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 - Node.js >= 18.x
-- PostgreSQL >= 14.x
 - npm ou yarn
 
-## 🔧 Instalação
-
-1. Clone o repositório:
+## Instalação
 
 ```bash
 git clone <url-do-repositorio>
 cd upnext-backend
-```
-
-2. Instale as dependências:
-
-```bash
 npm install
 ```
 
-3. Configure as variáveis de ambiente:
+## Configuração
 
-```bash
-cp .env.example .env
-```
-
-Edite o arquivo `.env` com suas configurações:
+Crie um arquivo `.env` na raiz:
 
 ```env
-NODE_ENV=development
+DATABASE_URL="file:./dev.db"
 PORT=3001
-DATABASE_URL="postgresql://usuario:senha@localhost:5432/upnext?schema=public"
 FRONTEND_URL=http://localhost:3000
 ```
 
-4. Execute as migrações do banco de dados:
+## Banco de Dados
 
 ```bash
+# Executar migrações
 npm run prisma:migrate
-```
 
-5. (Opcional) Popule o banco com dados de exemplo:
-
-```bash
+# Popular com dados de exemplo
 npm run prisma:seed
+
+# Abrir interface visual
+npm run prisma:studio
 ```
 
-## 🎯 Como Rodar
+## Execução
 
-### Modo Desenvolvimento
-
+**Desenvolvimento:**
 ```bash
 npm run dev
 ```
 
-### Modo Produção
-
+**Produção:**
 ```bash
 npm run build
 npm start
 ```
 
-## 📚 Documentação da API
+## Documentação
 
-Após iniciar o servidor, acesse:
+Após iniciar o servidor:
 
-- **Swagger UI**: <http://localhost:3001/api-docs>
-- **Health Check**: <http://localhost:3001/health>
+- API Docs: http://localhost:3001/api-docs
+- Health Check: http://localhost:3001/health
+- API Info: http://localhost:3001/api
 
-## 🗂️ Estrutura do Projeto
+## Estrutura
 
 ```
 src/
-├── config/           # Configurações (Swagger, etc)
-├── controllers/      # Controladores (recebem requisições)
-├── services/         # Lógica de negócios
-├── repositories/     # Acesso ao banco de dados
+├── config/           # Configurações (Swagger)
+├── controllers/      # Controllers HTTP
+├── services/         # Lógica de negócio
+├── repositories/     # Acesso ao banco
 ├── routes/           # Definição de rotas
-├── middlewares/      # Middlewares customizados
-├── types/            # Tipos TypeScript
-└── server.ts         # Arquivo principal
+└── server.ts         # Servidor Express
 
 prisma/
-├── schema.prisma     # Schema do banco de dados
+├── schema.prisma     # Schema do banco
 └── seed.ts           # Dados iniciais
 ```
 
-## 🔑 Variáveis de Ambiente
+## Endpoints
+
+### Programs
+- GET `/api/programs` - Listar todos
+- GET `/api/programs/:id` - Buscar por ID
+- POST `/api/programs` - Criar
+- PUT `/api/programs/:id` - Atualizar
+- DELETE `/api/programs/:id` - Deletar
+
+### Institutions
+- GET `/api/institutions` - Listar todas
+- GET `/api/institutions/:id` - Buscar por ID
+- POST `/api/institutions` - Criar
+- PUT `/api/institutions/:id` - Atualizar
+- DELETE `/api/institutions/:id` - Deletar
+
+### Users
+- GET `/api/users` - Listar todos
+- GET `/api/users/:id` - Buscar por ID
+- POST `/api/users` - Criar
+- PUT `/api/users/:id` - Atualizar
+- DELETE `/api/users/:id` - Deletar
+
+### Favorites
+- GET `/api/favorites/user/:userId` - Listar favoritos
+- POST `/api/favorites` - Adicionar favorito
+- DELETE `/api/favorites/:id` - Remover favorito
+
+## Scripts
+
+```bash
+npm run dev              # Desenvolvimento
+npm run build            # Compilar TypeScript
+npm start                # Executar build
+npm run prisma:generate  # Gerar Prisma Client
+npm run prisma:migrate   # Executar migrações
+npm run prisma:studio    # Abrir Prisma Studio
+npm run prisma:seed      # Popular banco
+```
+
+## Arquitetura
+
+O backend segue o padrão de três camadas:
+
+**Repository:** Acesso direto ao banco de dados via Prisma
+**Service:** Lógica de negócio e validações
+**Controller:** Manipulação de requisições HTTP
+
+## Variáveis de Ambiente
 
 | Variável | Descrição | Padrão |
 |----------|-----------|--------|
-| `NODE_ENV` | Ambiente de execução | `development` |
+| `DATABASE_URL` | Caminho do banco SQLite | `file:./dev.db` |
 | `PORT` | Porta do servidor | `3001` |
-| `DATABASE_URL` | URL de conexão do PostgreSQL | - |
 | `FRONTEND_URL` | URL do frontend (CORS) | `http://localhost:3000` |
-
-## 📡 Endpoints Principais
-
-### Programs
-
-- `GET /api/programs` - Lista todos os programas
-- `GET /api/programs/:id` - Busca programa por ID
-- `POST /api/programs` - Cria novo programa
-- `PUT /api/programs/:id` - Atualiza programa
-- `DELETE /api/programs/:id` - Remove programa
-
-### Institutions
-
-- `GET /api/institutions` - Lista todas as instituições
-- `GET /api/institutions/:id` - Busca instituição por ID
-- `POST /api/institutions` - Cria nova instituição
-- `PUT /api/institutions/:id` - Atualiza instituição
-- `DELETE /api/institutions/:id` - Remove instituição
-
-### Users
-
-- `GET /api/users` - Lista todos os usuários
-- `GET /api/users/:id` - Busca usuário por ID
-- `POST /api/users` - Cria novo usuário
-- `PUT /api/users/:id` - Atualiza usuário
-
-### Favorites
-
-- `GET /api/favorites/:userId` - Lista favoritos do usuário
-- `POST /api/favorites` - Adiciona programa aos favoritos
-- `DELETE /api/favorites/:userId/:programId` - Remove dos favoritos
-
-## 🧪 Scripts Disponíveis
-
-```bash
-npm run dev              # Roda em modo desenvolvimento
-npm run build            # Compila TypeScript
-npm start                # Roda versão compilada
-npm run prisma:generate  # Gera Prisma Client
-npm run prisma:migrate   # Executa migrações
-npm run prisma:studio    # Abre Prisma Studio
-npm run prisma:seed      # Popula banco com dados
-```
-
-## 🤝 Contribuição
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/NovaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/NovaFeature`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-MIT
