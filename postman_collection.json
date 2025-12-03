@@ -1,0 +1,646 @@
+{
+    "info": {
+        "_postman_id": "upnext-backend-collection",
+        "name": "UpNext Backend API",
+        "description": "Collection completa da API UpNext - Plataforma de programas de formação em tecnologia",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "upnext-api"
+    },
+    "item": [
+        {
+            "name": "Health & Info",
+            "item": [
+                {
+                    "name": "Health Check",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/health",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "health"
+                            ]
+                        },
+                        "description": "Verifica se a API está funcionando"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "API Info",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api"
+                            ]
+                        },
+                        "description": "Retorna informações sobre a API e seus endpoints"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Endpoints de verificação de saúde e informações da API"
+        },
+        {
+            "name": "Programs",
+            "item": [
+                {
+                    "name": "Listar Todos os Programas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/programs",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs"
+                            ]
+                        },
+                        "description": "Retorna todos os programas cadastrados"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Buscar Programa por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/programs/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{program_id}}",
+                                    "description": "ID do programa"
+                                }
+                            ]
+                        },
+                        "description": "Retorna um programa específico pelo ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Criar Programa",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Bootcamp Full Stack JavaScript\",\n  \"description\": \"Programa intensivo de 12 semanas para formação de desenvolvedores full stack com foco em JavaScript, React e Node.js\",\n  \"institutionId\": \"{{institution_id}}\",\n  \"category\": \"Bootcamp\",\n  \"level\": \"Intermediário\",\n  \"duration\": \"12 semanas\",\n  \"format\": \"Online\",\n  \"startDate\": \"2025-02-01\",\n  \"endDate\": \"2025-04-30\",\n  \"requirements\": [\n    \"Conhecimentos básicos de programação\",\n    \"Inglês técnico\",\n    \"Disponibilidade de 20h semanais\"\n  ],\n  \"benefits\": [\n    \"Certificado reconhecido\",\n    \"Mentoria individual\",\n    \"Projeto final no portfólio\",\n    \"Networking com profissionais da área\"\n  ],\n  \"imageUrl\": \"https://example.com/bootcamp-js.jpg\",\n  \"isActive\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/programs",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs"
+                            ]
+                        },
+                        "description": "Cria um novo programa"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Atualizar Programa",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Bootcamp Full Stack JavaScript - Edição 2025\",\n  \"description\": \"Programa intensivo atualizado com as tecnologias mais recentes do mercado\",\n  \"duration\": \"14 semanas\",\n  \"benefits\": [\n    \"Certificado reconhecido\",\n    \"Mentoria individual\",\n    \"Projeto final no portfólio\",\n    \"Networking com profissionais da área\",\n    \"Acesso vitalício ao conteúdo\"\n  ],\n  \"isActive\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/programs/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{program_id}}",
+                                    "description": "ID do programa"
+                                }
+                            ]
+                        },
+                        "description": "Atualiza um programa existente"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Deletar Programa",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/programs/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{program_id}}",
+                                    "description": "ID do programa"
+                                }
+                            ]
+                        },
+                        "description": "Remove um programa"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Filtrar por Categoria",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/programs?category=Bootcamp",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs"
+                            ],
+                            "query": [
+                                {
+                                    "key": "category",
+                                    "value": "Bootcamp",
+                                    "description": "Categoria: Bootcamp, Curso, Hackathon, Bolsa de Estudos"
+                                }
+                            ]
+                        },
+                        "description": "Filtra programas por categoria"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Filtrar por Nível",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/programs?level=Iniciante",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "programs"
+                            ],
+                            "query": [
+                                {
+                                    "key": "level",
+                                    "value": "Iniciante",
+                                    "description": "Nível: Iniciante, Intermediário, Avançado"
+                                }
+                            ]
+                        },
+                        "description": "Filtra programas por nível"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Endpoints para gerenciamento de programas"
+        },
+        {
+            "name": "Institutions",
+            "item": [
+                {
+                    "name": "Listar Todas as Instituições",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/institutions",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "institutions"
+                            ]
+                        },
+                        "description": "Retorna todas as instituições cadastradas"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Buscar Instituição por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/institutions/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "institutions",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{institution_id}}",
+                                    "description": "ID da instituição"
+                                }
+                            ]
+                        },
+                        "description": "Retorna uma instituição específica pelo ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Criar Instituição",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"TechAcademy Brasil\",\n  \"description\": \"Instituição focada em formação de profissionais de tecnologia com metodologia hands-on e projetos reais\",\n  \"website\": \"https://techacademy.com.br\",\n  \"logoUrl\": \"https://example.com/logo-techacademy.png\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/institutions",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "institutions"
+                            ]
+                        },
+                        "description": "Cria uma nova instituição"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Atualizar Instituição",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"TechAcademy Brasil - Edtech\",\n  \"description\": \"Líder em formação de profissionais de tecnologia com metodologia inovadora e parcerias com grandes empresas\",\n  \"website\": \"https://techacademy.com.br\",\n  \"logoUrl\": \"https://example.com/logo-techacademy-new.png\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/institutions/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "institutions",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{institution_id}}",
+                                    "description": "ID da instituição"
+                                }
+                            ]
+                        },
+                        "description": "Atualiza uma instituição existente"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Deletar Instituição",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/institutions/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "institutions",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{institution_id}}",
+                                    "description": "ID da instituição"
+                                }
+                            ]
+                        },
+                        "description": "Remove uma instituição"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Endpoints para gerenciamento de instituições"
+        },
+        {
+            "name": "Users",
+            "item": [
+                {
+                    "name": "Listar Todos os Usuários",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/users",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users"
+                            ]
+                        },
+                        "description": "Retorna todos os usuários cadastrados"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Buscar Usuário por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/users/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{user_id}}",
+                                    "description": "ID do usuário"
+                                }
+                            ]
+                        },
+                        "description": "Retorna um usuário específico pelo ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Criar Usuário",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Maria Silva\",\n  \"email\": \"maria.silva@example.com\",\n  \"interests\": [\n    \"Desenvolvimento Web\",\n    \"React\",\n    \"Node.js\",\n    \"Cloud Computing\"\n  ],\n  \"level\": \"Intermediário\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/users",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users"
+                            ]
+                        },
+                        "description": "Cria um novo usuário"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Atualizar Usuário",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"Maria Silva Santos\",\n  \"interests\": [\n    \"Desenvolvimento Web\",\n    \"React\",\n    \"Node.js\",\n    \"Cloud Computing\",\n    \"DevOps\"\n  ],\n  \"level\": \"Avançado\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/users/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{user_id}}",
+                                    "description": "ID do usuário"
+                                }
+                            ]
+                        },
+                        "description": "Atualiza um usuário existente"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Deletar Usuário",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/users/:id",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "users",
+                                ":id"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "{{user_id}}",
+                                    "description": "ID do usuário"
+                                }
+                            ]
+                        },
+                        "description": "Remove um usuário"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Endpoints para gerenciamento de usuários"
+        },
+        {
+            "name": "Favorites",
+            "item": [
+                {
+                    "name": "Listar Favoritos do Usuário",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/favorites/user/:userId",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "favorites",
+                                "user",
+                                ":userId"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "userId",
+                                    "value": "{{user_id}}",
+                                    "description": "ID do usuário"
+                                }
+                            ]
+                        },
+                        "description": "Retorna todos os programas favoritos de um usuário"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Adicionar Favorito",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"userId\": \"{{user_id}}\",\n  \"programId\": \"{{program_id}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/favorites",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "favorites"
+                            ]
+                        },
+                        "description": "Adiciona um programa aos favoritos do usuário"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remover Favorito",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"userId\": \"{{user_id}}\",\n  \"programId\": \"{{program_id}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/favorites",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "favorites"
+                            ]
+                        },
+                        "description": "Remove um programa dos favoritos do usuário"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "Endpoints para gerenciamento de favoritos"
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3001",
+            "type": "string"
+        },
+        {
+            "key": "user_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "program_id",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "institution_id",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}
